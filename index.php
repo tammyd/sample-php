@@ -5,10 +5,17 @@ use Cowsayphp\Farm;
 
 header('Content-Type: text/plain');
 
-$text = "Set a message by adding ?message=<message here> to the URL";
-if(isset($_GET['message']) && $_GET['message'] != '') {
-	$text = htmlspecialchars($_GET['message']);
+$cowMsg = "Set a message for the cow by adding ?cow=<message here> to the URL";
+$whaleMsg = "Set a message for the whale by adding ?whale=<message here> to the URL";
+if(isset($_GET['cow']) && $_GET['cow'] != '') {
+	$cowMsg = htmlspecialchars($_GET['cow']);
+}
+if(isset($_GET['whale']) && $_GET['whale'] != '') {
+    $whaleMsg = htmlspecialchars($_GET['whale']);
 }
 
 $cow = Farm::create(\Cowsayphp\Farm\Cow::class);
-echo $cow->say($text);
+echo $cow->say($cowMsg);
+
+$whale = Farm::create(\Cowsayphp\Farm\Whale::class);
+echo $whale->say($whaleMsg);
